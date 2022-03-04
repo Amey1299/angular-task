@@ -1,0 +1,44 @@
+<div class="container">
+  <h3>Edit Profile</h3>
+  <form name="signUp">
+    <div class="row">
+      <div class="row g-3">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="First name"
+            aria-label="First name"
+            formControlName="firstName"
+          />
+          <div class="text-danger">First name is required</div>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Last name"
+            aria-label="Last name"
+            formControlName="firstName"
+          />
+          <div class="text-danger">Last name is required</div>
+        </div>
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Email"
+          aria-label="Email"
+          formControlName="email"
+        />
+        <div class="text-danger">Email is required</div>
+      </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Select profile image</label>
+        <input class="form-control" type="file" id="formFile" />
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+  </form>
+</div>

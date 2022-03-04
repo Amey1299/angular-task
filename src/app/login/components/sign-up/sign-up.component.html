@@ -1,0 +1,88 @@
+<div class="container">
+  <h3>sign-up</h3>
+  <form name="signUp" [formGroup]="myGroup" (ngSubmit)="onSignUp()">
+    <div class="row">
+      <div class="row g-3">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="First name"
+            aria-label="First name"
+            formControlName="firstName"
+          />
+          <div
+            *ngIf="
+              (f['firstName'].invalid && f['firstName'].touched) ||
+              f['firstName'].dirty
+            "
+          >
+            <div
+              *ngIf="f['firstName'].errors?.['required']"
+              class="text-danger"
+            >
+              First name is required
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Last name"
+            aria-label="Last name"
+            formControlName="firstName"
+          />
+          <div
+            *ngIf="
+              (f['lastName'].invalid && f['lastName'].touched) ||
+              f['lastName'].dirty
+            "
+          >
+            <div *ngIf="f['lastName'].errors?.['required']" class="text-danger">
+              Last Name is required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Email"
+            aria-label="Email"
+            formControlName="email"
+          />
+          <div class="text-danger">Password is required</div>
+        </div>
+        <div class="row g-3">
+          <div class="col">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Password"
+              aria-label="Password"
+              formControlName="password"
+            />
+            <div class="text-danger">Password is required</div>
+          </div>
+          <div class="col">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Confirm password"
+              aria-label="Confirm password"
+              formControlName="confirmPassword"
+            />
+            <div class="text-danger">Confirm password is required</div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" routerLink="/sign-in">
+        Sign in
+      </button>
+      <a routerLink="/sign-in">Existing User?</a>
+    </div>
+  </form>
+</div>
