@@ -5,8 +5,11 @@ export interface I_SIGN_IN {
 }
 
 export interface I_SIGN_UP {
+    id: number;
     firstName: string;
     lastName: string;
     email: string;
     password: string;
+    imageSrc: any;
+
 }

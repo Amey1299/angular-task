@@ -1,31 +1,60 @@
 <div class="container">
   <h3>Sign In</h3>
   <div class="row g-3">
-    <div class="col">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="First name"
-        aria-label="First name"
-        formControlName="firstName"
-      />
-      <div class="text-danger">First name is required</div>
-    </div>
-    <div class="col">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Last name"
-        aria-label="Last name"
-        formControlName="firstName"
-      />
-      <div class="text-danger">Last name is required</div>
-    </div>
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary" (click)="onSignIn()">
-        Sign in
-      </button>
-    </div>
-    <a routerLink="/sign-up">New User?</a>
+    <form
+      name="signUp"
+      [formGroup]="signInForm"
+      (ngSubmit)="onSignIn(signInForm)"
+    >
+      <div class="col mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Email"
+          aria-label="Email"
+          formControlName="email"
+        />
+        <div
+          *ngIf="(f['email'].invalid && f['email'].touched) || f['email'].dirty"
+        >
+          <div *ngIf="f['email'].errors?.['required']" class="text-danger">
+            Email is required
+          </div>
+          <div *ngIf="f['email'].errors?.['email']" class="text-danger">
+            Enter valid email
+          </div>
+        </div>
+      </div>
+      <div class="col mb-3">
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Password"
+          aria-label="Password"
+          formControlName="password"
+        />
+        <div
+          *ngIf="
+            (f['password'].invalid && f['password'].touched) ||
+            f['password'].dirty
+          "
+        >
+          <div *ngIf="f['password'].errors?.['required']" class="text-danger">
+            password is required
+          </div>
+          <div *ngIf="f['password'].errors?.['minlength']" class="text-danger">
+            Enter at least 6 characters
+          </div>
+          <div *ngIf="f['password'].errors?.['maxlength']" class="text-danger">
+            Enter at most 25 characters
+          </div>
+          <div *ngIf="errMessage" class="text-danger">Invalid Credentials</div>
+        </div>
+      </div>
+      <div class="col-12 mb-3">
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </div>
+      <a routerLink="/sign-up">New User?</a>
+    </form>
   </div>
 </div>

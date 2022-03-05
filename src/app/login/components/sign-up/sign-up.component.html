@@ -1,6 +1,10 @@
 <div class="container">
-  <h3>sign-up</h3>
-  <form name="signUp" [formGroup]="myGroup" (ngSubmit)="onSignUp()">
+  <h3>Registration Form</h3>
+  <form
+    name="signUp"
+    [formGroup]="signUpForm"
+    (ngSubmit)="onSignUp(signUpForm)"
+  >
     <div class="row">
       <div class="row g-3">
         <div class="col">
@@ -10,6 +14,7 @@
             placeholder="First name"
             aria-label="First name"
             formControlName="firstName"
+            (keypress)="onlyChars($event)"
           />
           <div
             *ngIf="
@@ -31,7 +36,8 @@
             class="form-control"
             placeholder="Last name"
             aria-label="Last name"
-            formControlName="firstName"
+            formControlName="lastName"
+            (keypress)="onlyChars($event)"
           />
           <div
             *ngIf="
@@ -53,36 +59,123 @@
             placeholder="Email"
             aria-label="Email"
             formControlName="email"
+            (change)="checkUser($event)"
           />
-          <div class="text-danger">Password is required</div>
+          <div
+            *ngIf="
+              (f['email'].invalid && f['email'].touched) || f['email'].dirty
+            "
+          >
+            <div *ngIf="f['email'].errors?.['required']" class="text-danger">
+              Email is required
+            </div>
+            <div *ngIf="f['email'].errors?.['email']" class="text-danger">
+              Enter valid email
+            </div>
+            <div *ngIf="userExistFlag" class="text-danger">
+              User allready Exist
+            </div>
+          </div>
         </div>
         <div class="row g-3">
           <div class="col">
             <input
-              type="text"
+              type="password"
               class="form-control"
               placeholder="Password"
               aria-label="Password"
               formControlName="password"
             />
-            <div class="text-danger">Password is required</div>
+            <div
+              *ngIf="
+                (f['password'].invalid && f['password'].touched) ||
+                f['password'].dirty
+              "
+            >
+              <div
+                *ngIf="f['password'].errors?.['required']"
+                class="text-danger"
+              >
+                password is required
+              </div>
+              <div
+                *ngIf="f['password'].errors?.['minlength']"
+                class="text-danger"
+              >
+                Enter at least 6 characters
+              </div>
+              <div
+                *ngIf="f['password'].errors?.['maxlength']"
+                class="text-danger"
+              >
+                Enter at most 25 characters
+              </div>
+            </div>
           </div>
-          <div class="col">
+          <div class="col mb-4">
             <input
-              type="text"
+              type="password"
               class="form-control"
               placeholder="Confirm password"
               aria-label="Confirm password"
               formControlName="confirmPassword"
             />
-            <div class="text-danger">Confirm password is required</div>
+            <div
+              *ngIf="
+                (f['confirmPassword'].invalid &&
+                  f['confirmPassword'].touched) ||
+                f['confirmPassword'].dirty
+              "
+            >
+              <div
+                *ngIf="f['confirmPassword'].errors?.['required']"
+                class="text-danger"
+              >
+                Confirm Password is required
+              </div>
+              <div
+                *ngIf="f['confirmPassword'].errors?.['Password Mismatch']"
+                class="text-danger"
+              >
+                Password Not matched
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary" routerLink="/sign-in">
-        Sign in
-      </button>
-      <a routerLink="/sign-in">Existing User?</a>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Select profile image</label>
+        <input
+          class="form-control"
+          type="file"
+          id="formFile"
+          accept="image/*"
+          formControlName="imageSrc"
+          (change)="onChangeImage($event)"
+        />
+        <div
+          *ngIf="
+            (f['imageSrc'].invalid && f['imageSrc'].touched) ||
+            f['imageSrc'].dirty
+          "
+        >
+          <div *ngIf="f['imageSrc'].errors?.['required']" class="text-danger">
+            Please Upload Profile Picture
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <button type="submit" class="btn btn-primary col ms-2">Sign Up</button>
+        <button
+          type="submit"
+          class="btn btn-secondary col ms-2"
+          routerLink="sign-in"
+        >
+          Cancel
+        </button>
+      </div>
+
+      <a class="mt-3" routerLink="/sign-in">Existing User?</a>
     </div>
   </form>
 </div>

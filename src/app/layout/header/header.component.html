@@ -2,13 +2,20 @@
   <div class="row">
     <div class="col-8"></div>
     <div class="col-4">
-      <button type="submit" class="btn btn-primary" routerLink="/sign-in">
-        Sign in
-      </button>
-      <button type="submit" class="btn btn-primary" routerLink="/profile">
+      <button
+        type="submit"
+        class="btn btn-primary ms-2 mb-2"
+        routerLink="/profile"
+        *ngIf="isLoggedIn"
+      >
         Profile
       </button>
-      <button type="submit" class="btn btn-primary" (click)="onLogout()">
+      <button
+        type="submit"
+        class="btn btn-primary ms-2 mb-2"
+        (click)="onLogout()"
+        *ngIf="isLoggedIn"
+      >
         Logout
       </button>
     </div>

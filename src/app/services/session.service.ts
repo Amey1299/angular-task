@@ -19,4 +19,11 @@ export class SessionService {
     let c = localStorage.getItem('USER_INFO');
     return c;
   }
+  isLoggedin(): boolean {
+    return !!localStorage.getItem('AUTH_TOKEN');
+  }
+  flushStorage() {
+    localStorage.clear();
+    sessionStorage.clear();
+  }
 }
